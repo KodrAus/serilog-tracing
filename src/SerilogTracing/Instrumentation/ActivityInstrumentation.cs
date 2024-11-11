@@ -61,6 +61,94 @@ public static class ActivityInstrumentation
         messageTemplate = null;
         return false;
     }
+    
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="activity"></param>
+    /// <param name="traceId"></param>
+    public static void SetTraceIdOverride(Activity activity, ActivityTraceId traceId)
+    {
+        activity.SetCustomProperty(Constants.TraceIdOverridePropertyName, traceId);
+    }
+    
+    internal static bool TryGetTraceIdOverride(Activity activity, [NotNullWhen(true)] out ActivityTraceId? traceId)
+    {
+        if (activity.GetCustomProperty(Constants.TraceIdOverridePropertyName) is ActivityTraceId customPropertyValue)
+        {
+            traceId = customPropertyValue;
+            return true;
+        }
+
+        traceId = null;
+        return false;
+    }
+    
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="activity"></param>
+    /// <param name="spanId"></param>
+    public static void SetSpanIdOverride(Activity activity, ActivitySpanId spanId)
+    {
+        activity.SetCustomProperty(Constants.TraceIdOverridePropertyName, spanId);
+    }
+    
+    internal static bool TryGetSpanIdOverride(Activity activity, [NotNullWhen(true)] out ActivitySpanId? spanId)
+    {
+        if (activity.GetCustomProperty(Constants.SpanIdOverridePropertyName) is ActivitySpanId customPropertyValue)
+        {
+            spanId = customPropertyValue;
+            return true;
+        }
+
+        spanId = null;
+        return false;
+    }
+    
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="activity"></param>
+    /// <param name="parentSpanId"></param>
+    public static void SetParentSpanIdOverride(Activity activity, ActivitySpanId? parentSpanId)
+    {
+        activity.SetCustomProperty(Constants.ParentSpanIdOverridePropertyName, parentSpanId ?? default);
+    }
+    
+    internal static bool TryGetParentSpanIdOverride(Activity activity, [NotNullWhen(true)] out ActivitySpanId? parentSpanId)
+    {
+        if (activity.GetCustomProperty(Constants.ParentSpanIdOverridePropertyName) is ActivitySpanId customPropertyValue)
+        {
+            parentSpanId = customPropertyValue;
+            return true;
+        }
+
+        parentSpanId = null;
+        return false;
+    }
+    
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="activity"></param>
+    /// <param name="kind"></param>
+    public static void SetKindOverride(Activity activity, ActivityKind kind)
+    {
+        activity.SetCustomProperty(Constants.KindOverridePropertyName, kind);
+    }
+    
+    internal static bool TryGetKindOverride(Activity activity, [NotNullWhen(true)] out ActivityKind? kind)
+    {
+        if (activity.GetCustomProperty(Constants.KindOverridePropertyName) is ActivityKind customPropertyValue)
+        {
+            kind = customPropertyValue;
+            return true;
+        }
+
+        kind = null;
+        return false;
+    }
 
     /// <summary>
     /// Set a property on the given <see cref="Activity"/>, overwriting any previously set value

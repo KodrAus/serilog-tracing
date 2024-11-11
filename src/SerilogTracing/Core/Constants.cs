@@ -58,6 +58,10 @@ public static class Constants
     internal const string LogEventPropertyCollectionName = "SerilogTracing.LogEventPropertyCollection";
     internal const string SelfPropertyName = "SerilogTracing.LoggerActivity.Self";
     internal const string MessageTemplateOverridePropertyName = "SerilogTracing.LoggerActivity.MessageTemplate";
+    internal const string TraceIdOverridePropertyName = "SerilogTracing.LoggerActivity.TraceId";
+    internal const string SpanIdOverridePropertyName = "SerilogTracing.LoggerActivity.SpanId";
+    internal const string ParentSpanIdOverridePropertyName = "SerilogTracing.LoggerActivity.ParentSpanId";
+    internal const string KindOverridePropertyName = "SerilogTracing.LoggerActivity.Kind";
 
     internal const string ExceptionEventName = "exception";
     internal const string ExceptionMessageTagName = "exception.message";

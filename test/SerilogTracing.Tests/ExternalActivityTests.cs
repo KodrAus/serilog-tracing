@@ -206,5 +206,10 @@ public class ExternalActivityTests
             Assert.NotNull(activity);
         }
     }
-    
+
+    [Fact]
+    public void ExternalActivitiesMapEventsToLogEvents()
+    {
+        throw new NotImplementedException();
+    }
 }

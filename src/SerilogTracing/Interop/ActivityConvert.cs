@@ -50,15 +50,20 @@ static class ActivityConvert
             ? activityProperties
             : new Dictionary<string, LogEventPropertyValue>();
 
+        ActivityInstrumentation.TryGetTraceIdOverride(activity, out var traceId);
+        ActivityInstrumentation.TryGetSpanIdOverride(activity, out var spanId);
+        ActivityInstrumentation.TryGetParentSpanIdOverride(activity, out var parentSpanId);
+        ActivityInstrumentation.TryGetKindOverride(activity, out var kind);
+
         return ActivityToLogEvent(
             logger,
             activity,
             start,
             end,
-            activity.TraceId,
-            activity.SpanId,
-            activity.ParentSpanId,
-            activity.Kind,
+            traceId ?? activity.TraceId,
+            spanId ?? activity.SpanId,
+            parentSpanId ?? activity.ParentSpanId,
+            kind ?? activity.Kind,
             level,
             exception, 
             template,
@@ -81,6 +86,9 @@ static class ActivityConvert
         {
             ActivityInstrumentation.TryGetException(activity, out exception);
         }
+        
+        // NOTE: Override properties for message template, context etc. not used here
+        
         return ActivityToLogEvent(
             logger,
             activity,
