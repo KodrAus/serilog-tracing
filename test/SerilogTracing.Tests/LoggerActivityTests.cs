@@ -81,8 +81,8 @@ public class LoggerActivityTests
 
         var span = sink.SingleEvent;
         
-        var links = Assert.IsType<SequenceValue>(span.Properties[Core.Constants.SpanLinksPropertyName]);
-        Assert.Equal(linkedContext, ActivityContext.Parse(((ScalarValue)links.Elements.Single()).Value!.ToString()!, null));
+        Assert.True(span.Properties[Core.Constants.SpanLinksPropertyName] is SequenceValue { Elements: [ScalarValue { Value: ActivityLink link }] });
+        Assert.Equal(linkedContext, link.Context);
     }
 
     [Fact]
